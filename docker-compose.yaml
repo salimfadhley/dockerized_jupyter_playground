@@ -1,0 +1,35 @@
+version: '3.7'
+
+x-base-dev: &base-dev
+  restart: on-failure
+
+services:
+
+  python:
+    <<: *base-dev
+    image: salimfadhley/dockerized_jupyter_playground:${VERSION}
+    build:
+      context: .
+      target: jupyter
+    volumes:
+      - ./src:/src
+      - ./notebooks:/notebooks
+      - ./jupyter:/root/.local/share/jupyter
+    entrypoint: ["/usr/local/bin/python"]
+
+  jupyter:
+    <<: *base-dev
+    image: salimfadhley/dockerized_jupyter_playground:${VERSION}
+    build:
+      context: .
+      target: jupyter
+    volumes:
+      - ./src:/src
+      - ./notebooks:/notebooks
+      - ./jupyter:/root/.local/share/jupyter
+    ports:
+      - "80:80"
+    entrypoint: ["jupyter", "notebook", "--ip=0.0.0.0", "--port=80", "--allow-root"]
+
+
+

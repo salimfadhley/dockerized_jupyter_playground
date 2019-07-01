@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+runtime/*
+/jupyter/notebook_secret
+/jupyter/nbsignatures.db
+/jupyter/runtime/notebook_cookie_secret
